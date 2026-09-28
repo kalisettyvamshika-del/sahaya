@@ -22,10 +22,11 @@ export default function Layout() {
   const toast = useToast();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const isDemo = typeof window !== 'undefined' && localStorage.getItem('sahaya_demo_mode') === 'true';
 
   const handleLogout = () => {
     logout();
-    toast.info('Logged out');
+    toast.info(isDemo ? 'Demo session cleared' : 'Logged out');
     navigate('/login');
   };
 
@@ -73,6 +74,7 @@ export default function Layout() {
         <div className="flex items-center gap-2">
           <Shield className="w-6 h-6 text-violet-600" />
           <span className="font-bold text-navy-800">SAHAYA</span>
+          {isDemo && <span className="chip bg-amber-100 text-amber-700 text-[10px]">DEMO</span>}
         </div>
         <button
           aria-label="Toggle menu"
@@ -90,7 +92,10 @@ export default function Layout() {
             <Shield className="w-5 h-5 text-white" />
           </div>
           <div>
-            <p className="font-bold text-navy-800 leading-tight">SAHAYA</p>
+            <div className="flex items-center gap-1.5">
+              <p className="font-bold text-navy-800 leading-tight">SAHAYA</p>
+              {isDemo && <span className="chip bg-amber-100 text-amber-700 text-[10px]">DEMO</span>}
+            </div>
             <p className="text-[11px] text-navy-400">Prepare. Connect. Respond.</p>
           </div>
         </div>

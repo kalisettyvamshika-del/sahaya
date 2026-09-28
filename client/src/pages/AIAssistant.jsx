@@ -21,6 +21,11 @@ export default function AIAssistant() {
   const endRef = useRef(null);
 
   useEffect(() => {
+    // In demo mode, the AI returns canned responses — still "available"
+    if (localStorage.getItem('sahaya_demo_mode') === 'true') {
+      setAvailable(true);
+      return;
+    }
     api.get('/health').then((r) => setAvailable(r.data.services?.ai === 'configured')).catch(() => setAvailable(false));
   }, []);
 
