@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock, LogIn } from 'lucide-react';
+import { Mail, Lock, LogIn, AlertTriangle } from 'lucide-react';
 import { AuthShell, Field } from '../components/AuthShell.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
@@ -33,6 +33,19 @@ export default function Login() {
 
   return (
     <AuthShell title="Welcome back" subtitle="Log in to your SAHAYA account">
+      {/* Preview banner - shown because no backend is deployed yet */}
+      <div className="mb-5 p-3 rounded-xl bg-amber-50 border border-amber-200 flex items-start gap-2.5 text-amber-800 text-xs">
+        <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
+        <div>
+          <p className="font-semibold">Preview Mode</p>
+          <p className="text-amber-700 mt-0.5">
+            Frontend is live but the backend is not yet deployed.
+            Login/Signup will return "Network Error". The full UI is fully visible.
+            Once the backend goes live at <code className="font-mono bg-amber-100 px-1 py-0.5 rounded">sahaya-api.onrender.com</code>,
+            everything will work without rebuild.
+          </p>
+        </div>
+      </div>
       <form onSubmit={submit} className="space-y-5">
         <div>
           <span className="label">Email</span>
